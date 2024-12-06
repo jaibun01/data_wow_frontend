@@ -1,6 +1,13 @@
+import Home from "@/features/home";
+import Post from "@/features/post";
+import LayoutGlobal from "@/layout";
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <>sss</>
+    <LayoutGlobal>
+      <Home />
+
+      <Post />
+    </LayoutGlobal>
   );
 }
