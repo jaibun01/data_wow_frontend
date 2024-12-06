@@ -1,4 +1,4 @@
 
 export default function BlogPage() {
-  return <>BlogPage</>;
+  return <></>;
 }

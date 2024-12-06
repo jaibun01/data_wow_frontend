@@ -5,7 +5,7 @@ const Header = () => {
   return (
     <Box
       component={"header"}
-      className="castoro-regular-italic px-[32px] w-full"
+      className="castoro-regular-italic px-2 md:px-[32px] w-full"
       sx={{
         background: "var(--green-500)",
         height: "60px",

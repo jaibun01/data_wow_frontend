@@ -68,9 +68,15 @@
   --black: rgba(0, 0, 0, 1);
   --white: rgba(255, 255, 255, 1);
   --text: rgba(25, 25, 25, 1);
+  --black-100: rgba(16, 24, 40, 1);
   --grey-100: rgba(187, 194, 192, 1);
+  --grey-200: rgba(243, 243, 243, 1);
   --grey-300: rgba(147, 148, 148, 1);
+  --grey-400: rgba(74, 74, 74, 1);
   --success: rgba(73, 165, 105, 1);
+
+  --pad-inner: 52px;
+  --innerWidth: 1816px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -84,4 +90,9 @@ body {
   color: var(--text);
   background: var(--grey-100);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.inner {
+  inline-size: min(100% - var(--pad-inner)* 2, var(--innerWidth));
+  margin-inline: auto;
 }

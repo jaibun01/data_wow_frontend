@@ -28,6 +28,7 @@ const Home = () => {
                 width: "100%",
                 maxWidth: { xs: "100%", md: "60%", lg: "70%" },
               }}
+              name="search"
             />
 
           {/* <IconButton onClick={() => setOpenSearch(!openSearch)}>
@@ -51,7 +52,7 @@ const Home = () => {
               ]}
               sx={{ width: { xs: "200px", md: "100%" } }}
             />
-            <ButtonTheme label="Create +" sx={{ minWidth: "110px" }} />
+            <ButtonTheme label="Create +"  />
           </Box>
         </Box>
       </Box>

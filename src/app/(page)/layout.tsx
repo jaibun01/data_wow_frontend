@@ -23,6 +23,6 @@ export default function Layout({ children }: { children: ReactNode }) {
 
     //   </body>
     // </html>
-    <LayoutGlobal bgContent="bg-white">{children}</LayoutGlobal>
+    <LayoutGlobal>{children}</LayoutGlobal>
   );
 }

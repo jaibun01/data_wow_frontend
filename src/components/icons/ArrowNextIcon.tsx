@@ -1,6 +1,6 @@
 import React from "react";
 
-const ArrowNextcon = ({
+const ArrowNextIcon = ({
   width = 19,
   height = 15,
   onClick,
@@ -26,4 +26,4 @@ const ArrowNextcon = ({
   </svg>
 );
 
-export default ArrowNextcon;
+export default ArrowNextIcon;
