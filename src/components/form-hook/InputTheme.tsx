@@ -26,6 +26,7 @@ const InputTheme = ({ ...props }: IProps) => {
       return (
         <>
           <TextField
+            fullWidth={props.fullWidth}
             label={props.label || ""}
             id={props.id}
             className="IBMPlexSans-Regular"
@@ -106,9 +107,9 @@ const InputTheme = ({ ...props }: IProps) => {
         <Controller
           name={props.name || ""}
           control={props.control}
-          render={({ field, fieldState: { error } }) =>
-            textComponent(field, error)
-          }
+          render={({ field, fieldState: { error } }) => {
+            return textComponent(field, error);
+          }}
         />
       ) : (
         textComponent()
