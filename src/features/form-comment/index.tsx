@@ -6,6 +6,7 @@ import ButtonTheme from "@/components/common/Button";
 import { Control, SubmitHandler, UseFormHandleSubmit } from "react-hook-form";
 interface IProps {
   handleSubmit: UseFormHandleSubmit<InputsFomrComment>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   control: Control<any, any>;
   onSubmit: SubmitHandler<InputsFomrComment>;
   handleOpenComment: () => void;

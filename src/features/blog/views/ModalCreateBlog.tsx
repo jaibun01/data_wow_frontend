@@ -1,11 +1,9 @@
 import {
   Box,
   Dialog,
-  DialogActions,
   DialogContent,
   DialogTitle,
   IconButton,
-  Modal,
   Typography,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
@@ -20,6 +18,7 @@ interface IProps {
   openModelCreate: boolean;
   setOpenModelCreate: React.Dispatch<React.SetStateAction<boolean>>;
   handleSubmit: UseFormHandleSubmit<IFormValues>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   control: Control<any, any>;
   onSubmit: SubmitHandler<IFormValues>;
 }

@@ -1,7 +1,9 @@
 import ButtonTheme from "@/components/common/Button";
 import { Box, Typography } from "@mui/material";
+import { useRouter } from "next/navigation";
 
 const Header = () => {
+  const router = useRouter();
   return (
     <Box
       component={"header"}
@@ -22,7 +24,12 @@ const Header = () => {
       >
         a Board
       </Typography>
-      <ButtonTheme label="Sign In" />
+      <ButtonTheme
+        label="Sign In"
+        onClick={() => {
+          router.push("/signin");
+        }}
+      />
     </Box>
   );
 };

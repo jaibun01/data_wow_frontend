@@ -19,12 +19,14 @@ interface IOpetionSelect {
 interface IProps extends BaseSelectProps {
   id: string;
   options: IOpetionSelect[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   control?: Control<any, any>;
   name: string;
 }
 
 const SelectTheme = ({ ...props }: IProps) => {
   const selectComponent = useCallback(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (field?: ControllerRenderProps<any, any>, errors?: FieldError) => {
       return (
         <>

@@ -9,7 +9,6 @@ import {
   Control,
   Controller,
   ControllerRenderProps,
-  Field,
   FieldError,
 } from "react-hook-form";
 interface IProps extends StandardTextFieldProps {
@@ -22,6 +21,7 @@ interface IProps extends StandardTextFieldProps {
 }
 const InputTheme = ({ ...props }: IProps) => {
   const textComponent = useCallback(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (field?: ControllerRenderProps<any, any>, errors?: FieldError) => {
       return (
         <>

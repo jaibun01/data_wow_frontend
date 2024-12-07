@@ -19,8 +19,9 @@ const useFormComment = () => {
             resolver: yupResolver(schema),
         }
     )
-    const handleOpenComment = () => setOpenComment(!openComment)
     const onSubmit: SubmitHandler<InputsFomrComment> = (data) => console.log(data)
+
+    const handleOpenComment = () => setOpenComment(!openComment)
     return {
         methods,
         onSubmit,

@@ -1,5 +1,5 @@
 import { METADATA } from '@/constants/METADATA';
-import LayoutGlobal from '@/layout';
+import LayoutLogin from '@/layout/layout-login';
 import type { Metadata, Viewport } from 'next';
 import { ReactNode } from 'react';
 
@@ -14,6 +14,6 @@ export const viewport: Viewport = {
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
-    <LayoutGlobal>{children}</LayoutGlobal>
+    <LayoutLogin fullWidth>{children}</LayoutLogin>
   );
 }
