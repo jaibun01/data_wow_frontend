@@ -12,6 +12,8 @@ const ButtonTheme = ({ label, theme = "fill", ...props }: IProps) => {
       className="IBMPlexSans-SemiBold text-sm !capitalize !px-[29.5px]"
       onClick={props.onClick}
       type={props.type || "button"}
+      startIcon={props.startIcon || null}
+      endIcon={props.endIcon || null}
       sx={{
         backgroundColor: `${
           theme === "outline" ? "var(--white)" : "var(--success)"

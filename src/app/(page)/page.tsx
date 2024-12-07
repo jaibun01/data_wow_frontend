@@ -1,12 +1,12 @@
 "use client";
-import Home from "@/features/home";
-import Post from "@/features/blog";
+import dynamic from "next/dynamic";
+const Post = dynamic(() => import('@/features/blog'), { ssr: false })
+const Home = dynamic(() => import('@/features/home'), { ssr: false })
 
 export default function HomePage() {
   return (
     <>
       <Home />
-
       <Post />
     </>
   );

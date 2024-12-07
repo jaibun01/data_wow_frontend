@@ -32,7 +32,7 @@ const SelectTheme = ({ ...props }: IProps) => {
         <>
           <TextField
             select
-            defaultValue={props.label}
+            defaultValue={props.label?.toString() || ""}
             id={props.id}
             SelectProps={{
               IconComponent: KeyboardArrowDownIcon, // Replace default arrow

@@ -1,38 +1,37 @@
-'use client';
+"use client";
 
-import { useEffect } from 'react';
+import { IResGetProfile } from "@/features/form-signin/interfaces";
+import { SignInMutation } from "@/features/form-signin/services";
+import { optionsOnceTime } from "@/utils/axios";
 
 // NEXT
-// import { useRouter } from 'next/navigation'
-
-// PROJECT IMPORTS
-// import Loader from '@/components/Loader'
+import { usePathname, useRouter } from "next/navigation";
 
 // TYPES
-import React from 'react';
-// import { useSession } from 'next-auth/react';
-
+import React from "react";
+import useSWR from "swr";
 // ==============================|| AUTH GUARD ||============================== //
-
+const signInMutation = new SignInMutation();
 const AuthGuard = ({ children }: { children: React.ReactNode }) => {
-  // const { data: session } = useSession();
-  // const router = useRouter()
+  const router = useRouter();
+  const pathname = usePathname();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      // const res: any = await fetch('/api/auth/protected');
-      // const json = await res?.json();
-      // if (!json?.protected) {
-      //   router.push('/login')
-      // }
-    };
-    fetchData();
+  const URL = [`/auth/profile`];
+  const { data, isLoading } = useSWR<IResGetProfile>(
+    URL,
+    signInMutation.getProfile,
+    {
+      ...optionsOnceTime,
+    }
+  );
 
-    // eslint-disable-next-line
-  }, []);
+  if (isLoading) return <></>;
 
-  // if (status == 'loading' || !session?.user) return <Loader />
-
+  if (!data) {
+    if (pathname === "/our-blog") {
+      router.push("/signin");
+    }
+  }
   return <>{children}</>;
 };
 

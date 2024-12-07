@@ -27,12 +27,15 @@ const InputTheme = ({ ...props }: IProps) => {
         <>
           <TextField
             fullWidth={props.fullWidth}
-            label={props.label || ""}
+            label={props.label?.toString() || ""}
             id={props.id}
             className="IBMPlexSans-Regular"
             error={!!errors}
             sx={{
               "& .MuiOutlinedInput-root": {
+                "& input" : {
+                  height: "0px"
+                },
                 "& fieldset": {
                   borderColor: "transparent", // Default border color
                 },

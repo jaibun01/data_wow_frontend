@@ -1,4 +1,6 @@
-import { Box } from "@mui/material";
+"use client";
+
+import { Box, CircularProgress } from "@mui/material";
 import useSignIn from "./hooks/useSignin";
 import InputTheme from "@/components/form-hook/InputTheme";
 import ButtonTheme from "@/components/common/Button";
@@ -7,6 +9,7 @@ const FormSignIn = () => {
   const {
     methods: { control, handleSubmit },
     onSubmit,
+    loading,
   } = useSignIn();
   return (
     <Box
@@ -53,7 +56,16 @@ const FormSignIn = () => {
           name="password"
           control={control}
         />
-        <ButtonTheme label={"Sign in"} type="submit" fullWidth />
+        <ButtonTheme
+          label={"Sign in"}
+          type="submit"
+          fullWidth
+          startIcon={
+            loading ? (
+              <CircularProgress size={17} sx={{ color: "var(--white)" }} />
+            ) : null
+          }
+        />
       </Box>
     </Box>
   );

@@ -17,12 +17,6 @@ export const viewport: Viewport = {
 // eslint-disable-next-line no-unused-vars
 export default function Layout({ children }: { children: ReactNode }) {
   return (
-    // <html lang="en">
-    //   <body suppressHydrationWarning>
-    //     <LayoutGlobal showLeftSideBar>{children}</LayoutGlobal>
-
-    //   </body>
-    // </html>
     <LayoutGlobal bgContent="bg-white">{children}</LayoutGlobal>
   );
 }

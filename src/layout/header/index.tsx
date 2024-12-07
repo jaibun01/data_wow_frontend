@@ -1,9 +1,12 @@
-import ButtonTheme from "@/components/common/Button";
+import useProfileStore from "@/stores/useProfileStore";
 import { Box, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
+import ProfileBadge from "./ProfileBadge";
+import ButtonTheme from "@/components/common/Button";
 
 const Header = () => {
   const router = useRouter();
+  const { data } = useProfileStore();
   return (
     <Box
       component={"header"}
@@ -24,12 +27,16 @@ const Header = () => {
       >
         a Board
       </Typography>
-      <ButtonTheme
-        label="Sign In"
-        onClick={() => {
-          router.push("/signin");
-        }}
-      />
+      {data.sub ? (
+        <ProfileBadge />
+      ) : (
+        <ButtonTheme
+          label="Sign In"
+          onClick={() => {
+            router.push("/signin");
+          }}
+        />
+      )}
     </Box>
   );
 };
