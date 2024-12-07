@@ -19,6 +19,7 @@ interface IOpetionSelect {
 interface IProps extends BaseSelectProps {
   id: string;
   options: IOpetionSelect[];
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   control?: Control<any, any>;
   name: string;
@@ -90,6 +91,10 @@ const SelectTheme = ({ ...props }: IProps) => {
               },
               ...props.sx,
             }}
+            onChange={(e) => {
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              (props?.onChange as any)?.(e);
+            }}
             {...field}
           >
             <MenuItem
@@ -123,7 +128,7 @@ const SelectTheme = ({ ...props }: IProps) => {
         </>
       );
     },
-    [props.id, props.label, props.options, props.sx]
+    [props.id, props.label, props?.onChange, props.options, props.sx]
   );
   return (
     <>

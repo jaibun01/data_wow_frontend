@@ -60,6 +60,7 @@ const FormSignIn = () => {
           label={"Sign in"}
           type="submit"
           fullWidth
+          disabled={loading}
           startIcon={
             loading ? (
               <CircularProgress size={17} sx={{ color: "var(--white)" }} />

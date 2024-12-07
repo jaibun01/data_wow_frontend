@@ -6,6 +6,7 @@ interface IProps extends ButtonProps {
 const ButtonTheme = ({ label, theme = "fill", ...props }: IProps) => {
   return (
     <Button
+      disabled={props.disabled}
       fullWidth={props.fullWidth || false}
       variant={props.variant || "contained"}
       size={props.size || "small"}

@@ -1,14 +1,13 @@
+"use client";
 import CardBlog from "@/components/common/CardBlog";
 import { IDataBlog } from "@/features/blog/interfaces";
 import { Box, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 interface IProps {
   list: IDataBlog[];
-  setOpenModelCreate?: React.Dispatch<React.SetStateAction<boolean | IDataBlog>>;
 }
-const ListOurBlog = ({ list, setOpenModelCreate }: IProps) => {
+const Post = ({ list }: IProps) => {
   const router = useRouter();
-
   return (
     <Box
       component={"section"}
@@ -32,10 +31,6 @@ const ListOurBlog = ({ list, setOpenModelCreate }: IProps) => {
                 badge={item.community_id.title}
                 description={item.description}
                 comment={10}
-                edit
-                handleEdit={() => {
-                  setOpenModelCreate?.(item);
-                }}
               />
             </Box>
           );
@@ -47,4 +42,4 @@ const ListOurBlog = ({ list, setOpenModelCreate }: IProps) => {
   );
 };
 
-export default ListOurBlog;
+export default Post;

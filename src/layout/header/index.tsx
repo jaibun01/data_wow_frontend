@@ -1,8 +1,10 @@
+"use client";
 import useProfileStore from "@/stores/useProfileStore";
 import { Box, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
-import ProfileBadge from "./ProfileBadge";
-import ButtonTheme from "@/components/common/Button";
+import dynamic from "next/dynamic";
+const ButtonTheme = dynamic(() => import('@/components/common/Button'), { ssr: false })
+const ProfileBadge = dynamic(() => import('./ProfileBadge'), { ssr: false })
 
 const Header = () => {
   const router = useRouter();

@@ -1,9 +1,10 @@
 "use client";
 
 import { Box, useMediaQuery, useTheme } from "@mui/material";
-import Header from "./header";
-import Footer from "./footer";
-import LeftSideBar from "./left-side-bar";
+import dynamic from "next/dynamic";
+const LeftSideBar = dynamic(() => import('./left-side-bar'), { ssr: false })
+const Footer = dynamic(() => import('./footer'), { ssr: false })
+const Header = dynamic(() => import('./header'), { ssr: false })
 
 export default function LayoutGlobal({
   children,

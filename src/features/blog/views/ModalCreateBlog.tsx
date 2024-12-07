@@ -1,5 +1,7 @@
+"use client";
 import {
   Box,
+  CircularProgress,
   Dialog,
   DialogContent,
   DialogTitle,
@@ -13,14 +15,17 @@ import InputTheme from "@/components/form-hook/InputTheme";
 import SelectTheme from "@/components/form-hook/SelectTheme";
 import { Inter } from "next/font/google";
 import ButtonTheme from "@/components/common/Button";
+import { IDataBlog, IDataCommunity } from "../interfaces";
 const inter = Inter({ subsets: ["latin"] });
 interface IProps {
-  openModelCreate: boolean;
-  setOpenModelCreate: React.Dispatch<React.SetStateAction<boolean>>;
+  openModelCreate: boolean | IDataBlog;
+  setOpenModelCreate: React.Dispatch<React.SetStateAction<boolean | IDataBlog>>;
   handleSubmit: UseFormHandleSubmit<IFormValues>;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   control: Control<any, any>;
   onSubmit: SubmitHandler<IFormValues>;
+  loadingForm?: boolean;
+  community?: IDataCommunity[];
 }
 const ModalCreateBlog = ({
   openModelCreate,
@@ -28,12 +33,13 @@ const ModalCreateBlog = ({
   handleSubmit,
   control,
   onSubmit,
+  loadingForm,
+  community,
 }: IProps) => {
-    
   return (
     <>
       <Dialog
-        open={openModelCreate}
+        open={Boolean(openModelCreate)}
         onClose={() => setOpenModelCreate(!openModelCreate)}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
@@ -56,7 +62,7 @@ const ModalCreateBlog = ({
                 fontFamily: inter.style.fontFamily,
               }}
             >
-              Create Post
+              {typeof openModelCreate != 'boolean' ? "Edit" : "Create"} Post
             </Typography>
 
             <IconButton onClick={() => setOpenModelCreate(!openModelCreate)}>
@@ -80,10 +86,12 @@ const ModalCreateBlog = ({
                   id="select_community"
                   name="community"
                   control={control}
-                  options={[
-                    { label: "All", value: "all" },
-                    { label: "Alls", value: "alls" },
-                  ]}
+                  options={
+                    community?.map((item) => ({
+                      value: item._id,
+                      label: item.title,
+                    })) || []
+                  }
                   sx={{
                     width: { xs: "200px", md: "100%" },
                     "& .MuiSelect-icon": {
@@ -150,7 +158,19 @@ const ModalCreateBlog = ({
                 theme="outline"
                 onClick={() => setOpenModelCreate(!openModelCreate)}
               />
-              <ButtonTheme label={"Post"} type="submit" />
+              <ButtonTheme
+                disabled={loadingForm}
+                label={"Post"}
+                type="submit"
+                startIcon={
+                  loadingForm ? (
+                    <CircularProgress
+                      size={20}
+                      sx={{ color: "var(--white)" }}
+                    />
+                  ) : null
+                }
+              />
             </Box>
           </DialogContent>
         </form>

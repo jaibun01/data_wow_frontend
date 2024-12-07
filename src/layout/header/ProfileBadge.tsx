@@ -1,10 +1,13 @@
-import ButtonTheme from "@/components/common/Button";
+"use client";
+
 import useProfileStore from "@/stores/useProfileStore";
 import { helper } from "@/utils/helpers";
 import { Avatar, Popover, Typography } from "@mui/material";
+import dynamic from "next/dynamic";
 import { Inter } from "next/font/google";
 import React from "react";
 const inter = Inter({ subsets: ["latin"] });
+const ButtonTheme = dynamic(() => import('@/components/common/Button'), { ssr: false })
 
 const ProfileBadge = () => {
   const { data } = useProfileStore();

@@ -3,10 +3,15 @@ import SelectTheme from "@/components/form-hook/SelectTheme";
 import ButtonTheme from "@/components/common/Button";
 import SearchIcon from "@/components/icons/SearchIcon";
 import { Box } from "@mui/material";
+import { IDataBlog, IDataCommunity } from "@/features/blog/interfaces";
 interface IProps {
-  setOpenModelCreate: React.Dispatch<React.SetStateAction<boolean>>;
+  setOpenModelCreate: React.Dispatch<React.SetStateAction<boolean | IDataBlog>>;
+  community: IDataCommunity[];
+  setFilter: React.Dispatch<
+    React.SetStateAction<{ search: string; community_id: string }>
+  >;
 }
-const HeadSearch = ({ setOpenModelCreate }: IProps) => {
+const HeadSearch = ({ setOpenModelCreate, community, setFilter }: IProps) => {
   return (
     <Box
       sx={{
@@ -25,6 +30,9 @@ const HeadSearch = ({ setOpenModelCreate }: IProps) => {
           maxWidth: { xs: "100%", md: "60%", lg: "70%" },
         }}
         name="search"
+        onChange={(e) => {
+          setFilter((prev) => ({ ...prev, search: e.target.value }));
+        }}
       />
 
       {/* <IconButton onClick={() => setOpenSearch(!openSearch)}>
@@ -43,13 +51,25 @@ const HeadSearch = ({ setOpenModelCreate }: IProps) => {
           label="Community"
           id="select_community"
           options={[
-            { label: "All", value: "all" },
-            { label: "Alls", value: "alls" },
+            { label: "All", value: "" },
+            ...(community?.map((item) => ({
+              value: item._id,
+              label: item.title,
+            })) || []),
           ]}
           sx={{ width: { xs: "200px", md: "100%" } }}
           name="community"
+          onChange={(e) => {
+            setFilter((prev) => ({
+              ...prev,
+              community_id: e.target.value as string,
+            }));
+          }}
         />
-        <ButtonTheme label="Create +" onClick={() => setOpenModelCreate(true)} />
+        <ButtonTheme
+          label="Create +"
+          onClick={() => setOpenModelCreate(true)}
+        />
       </Box>
     </Box>
   );

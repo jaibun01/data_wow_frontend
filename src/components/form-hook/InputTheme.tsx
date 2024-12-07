@@ -33,8 +33,8 @@ const InputTheme = ({ ...props }: IProps) => {
             error={!!errors}
             sx={{
               "& .MuiOutlinedInput-root": {
-                "& input" : {
-                  height: "0px"
+                "& input": {
+                  height: "0px",
                 },
                 "& fieldset": {
                   borderColor: "transparent", // Default border color
@@ -89,6 +89,7 @@ const InputTheme = ({ ...props }: IProps) => {
             variant={props.variant || "outlined"}
             multiline={props.multiline || false}
             maxRows={props.maxRows || 1}
+            onChange={props.onChange}
             {...field}
           />
           {errors && (
@@ -102,7 +103,19 @@ const InputTheme = ({ ...props }: IProps) => {
         </>
       );
     },
-    [props.endIcon, props.fullWidth, props.id, props.label, props.maxRows, props.multiline, props.placeholder, props.startIcon, props.sx, props.variant]
+    [
+      props.endIcon,
+      props.fullWidth,
+      props.id,
+      props.label,
+      props.maxRows,
+      props.multiline,
+      props.onChange,
+      props.placeholder,
+      props.startIcon,
+      props.sx,
+      props.variant,
+    ]
   );
   return (
     <>
