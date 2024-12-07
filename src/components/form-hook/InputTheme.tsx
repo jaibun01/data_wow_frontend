@@ -4,7 +4,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback } from "react";
 import {
   Control,
   Controller,
@@ -99,7 +99,7 @@ const InputTheme = ({ ...props }: IProps) => {
         </>
       );
     },
-    []
+    [props.endIcon, props.fullWidth, props.id, props.label, props.maxRows, props.multiline, props.placeholder, props.startIcon, props.sx, props.variant]
   );
   return (
     <>

@@ -123,7 +123,7 @@ const SelectTheme = ({ ...props }: IProps) => {
         </>
       );
     },
-    []
+    [props.id, props.label, props.options, props.sx]
   );
   return (
     <>
