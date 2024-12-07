@@ -1,7 +1,9 @@
-import { Avatar, Box, CardHeader, Typography } from "@mui/material";
+import { Avatar, Box, CardHeader, IconButton, Typography } from "@mui/material";
 import BadgeTheme from "./BadgeTheme";
 import { Inter } from "next/font/google";
 import CommentIcon from "../icons/CommentIcon";
+import PencilIcon from "../icons/PencilIcon";
+import TrashIcon from "../icons/TrashIcon";
 const inter = Inter({ subsets: ["latin"] });
 interface IProps {
   name: string;
@@ -11,8 +13,11 @@ interface IProps {
   description: string;
   comment: number;
   page?: "post" | "detail";
+  edit?: boolean;
+  handleDelete?: () => void;
+  handleEdit?: () => void;
 }
-const CardBlog = ({ page = "post", ...props }: IProps) => {
+const CardBlog = ({ page = "post", edit, ...props }: IProps) => {
   return (
     <>
       <CardHeader
@@ -47,6 +52,28 @@ const CardBlog = ({ page = "post", ...props }: IProps) => {
             )}
           </Box>
         } // {props.name}
+        action={
+          edit && (
+            <Box sx={{ display: "flex", alignItems: "center" }}>
+              <IconButton
+                onClick={(e) => {
+                  e.stopPropagation();
+                  props?.handleEdit?.();
+                }}
+              >
+                <PencilIcon />
+              </IconButton>
+              <IconButton
+                onClick={(e) => {
+                  e.stopPropagation();
+                  props?.handleDelete?.();
+                }}
+              >
+                <TrashIcon />
+              </IconButton>
+            </Box>
+          )
+        }
         // subheader="September 14, 2016"
       />
       <BadgeTheme label={props.badge} />

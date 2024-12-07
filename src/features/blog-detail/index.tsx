@@ -1,7 +1,7 @@
 "use client";
-import ButtonTheme from "@/components/global/Button";
-import CardBlog from "@/components/global/CardBlog";
-import CardComment from "@/components/global/CardComment";
+import ButtonTheme from "@/components/common/Button";
+import CardBlog from "@/components/common/CardBlog";
+import CardComment from "@/components/common/CardComment";
 import FormComment from "@/features/form-comment";
 import useFormComment from "../form-comment/hooks/useFormComment";
 const BlogDetailPage = () => {

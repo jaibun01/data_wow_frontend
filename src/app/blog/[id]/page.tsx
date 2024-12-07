@@ -1,5 +1,5 @@
-import BackButton from "@/components/global/BackButton";
-import BlogDetailPage from "@/features/blogDetail";
+import BackButton from "@/components/common/BackButton";
+import BlogDetailPage from "@/features/blog-detail";
 
 export default function BlogDetialPage() {
   return (

@@ -1,6 +1,6 @@
 import InputTheme from "@/components/form-hook/InputTheme";
 import SelectTheme from "@/components/form-hook/SelectTheme";
-import ButtonTheme from "@/components/global/Button";
+import ButtonTheme from "@/components/common/Button";
 import SearchIcon from "@/components/icons/SearchIcon";
 import { Box } from "@mui/material";
 interface IProps {

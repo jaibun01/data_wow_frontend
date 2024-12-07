@@ -1,4 +1,4 @@
-import ButtonTheme from "@/components/global/Button";
+import ButtonTheme from "@/components/common/Button";
 import { Box, Typography } from "@mui/material";
 
 const Header = () => {

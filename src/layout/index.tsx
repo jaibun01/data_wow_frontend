@@ -3,7 +3,7 @@
 import { Box, useMediaQuery, useTheme } from "@mui/material";
 import Header from "./header";
 import Footer from "./footer";
-import LeftSideBar from "./leftSideBar";
+import LeftSideBar from "./left-side-bar";
 
 export default function LayoutGlobal({
   children,

@@ -14,7 +14,7 @@ import { IFormValues } from "../hooks/useCreateBlog";
 import InputTheme from "@/components/form-hook/InputTheme";
 import SelectTheme from "@/components/form-hook/SelectTheme";
 import { Inter } from "next/font/google";
-import ButtonTheme from "@/components/global/Button";
+import ButtonTheme from "@/components/common/Button";
 const inter = Inter({ subsets: ["latin"] });
 interface IProps {
   openModelCreate: boolean;

@@ -2,7 +2,7 @@
 import { Box } from "@mui/material";
 import { InputsFomrComment } from "./hooks/useFormComment";
 import InputTheme from "@/components/form-hook/InputTheme";
-import ButtonTheme from "@/components/global/Button";
+import ButtonTheme from "@/components/common/Button";
 import { Control, SubmitHandler, UseFormHandleSubmit } from "react-hook-form";
 interface IProps {
   handleSubmit: UseFormHandleSubmit<InputsFomrComment>;
