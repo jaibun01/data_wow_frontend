@@ -2,9 +2,9 @@
 
 import { Box, useMediaQuery, useTheme } from "@mui/material";
 import dynamic from "next/dynamic";
-const LeftSideBar = dynamic(() => import('./left-side-bar'), { ssr: false })
-const Footer = dynamic(() => import('./footer'), { ssr: false })
-const Header = dynamic(() => import('./header'), { ssr: false })
+const LeftSideBar = dynamic(() => import("./left-side-bar"), { ssr: false });
+const Footer = dynamic(() => import("./footer"), { ssr: false });
+const Header = dynamic(() => import("./header"), { ssr: false });
 
 export default function LayoutGlobal({
   children,
@@ -17,18 +17,21 @@ export default function LayoutGlobal({
 }) {
   const theme = useTheme();
   const downSM = useMediaQuery(theme.breakpoints.down("sm"));
-
+  const downMd = useMediaQuery(theme.breakpoints.down("md"));
   return (
     <Box component={"main"}>
       <Header />
       <Box component={"section"} className="w-full flex">
-        <Box
-          component={"section"}
-          sx={{ width: "280px" }}
-          className={`md:block hidden`}
-        >
-          <LeftSideBar />
-        </Box>
+        {!downMd && (
+          <Box
+            component={"section"}
+            sx={{ width: "280px" }}
+            className={`md:block hidden`}
+          >
+            <LeftSideBar />
+          </Box>
+        )}
+
         <Box
           component={"section"}
           className={`w-full h-screen ${bgContent ? bgContent : ""}`}

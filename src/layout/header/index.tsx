@@ -1,14 +1,19 @@
 "use client";
 import useProfileStore from "@/stores/useProfileStore";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, useMediaQuery, useTheme } from "@mui/material";
 import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
-const ButtonTheme = dynamic(() => import('@/components/common/Button'), { ssr: false })
-const ProfileBadge = dynamic(() => import('./ProfileBadge'), { ssr: false })
+import DrawerLeft from "./DrawerLeft";
+const ButtonTheme = dynamic(() => import("@/components/common/Button"), {
+  ssr: false,
+});
+const ProfileBadge = dynamic(() => import("./ProfileBadge"), { ssr: false });
 
 const Header = () => {
   const router = useRouter();
   const { data } = useProfileStore();
+  const theme = useTheme();
+  const downMd = useMediaQuery(theme.breakpoints.down("md"));
   return (
     <Box
       component={"header"}
@@ -29,16 +34,26 @@ const Header = () => {
       >
         a Board
       </Typography>
-      {data.sub ? (
-        <ProfileBadge />
-      ) : (
-        <ButtonTheme
-          label="Sign In"
-          onClick={() => {
-            router.push("/signin");
-          }}
-        />
-      )}
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          gap: 2,
+        }}
+      >
+        {data.sub ? (
+          <ProfileBadge />
+        ) : (
+          <ButtonTheme
+            label="Sign In"
+            onClick={() => {
+              router.push("/signin");
+            }}
+          />
+        )}
+        {downMd && <DrawerLeft />}
+      </Box>
     </Box>
   );
 };

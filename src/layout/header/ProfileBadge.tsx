@@ -1,85 +1,36 @@
 "use client";
 
 import useProfileStore from "@/stores/useProfileStore";
-import { helper } from "@/utils/helpers";
-import { Avatar, Box, Popover } from "@mui/material";
-import dynamic from "next/dynamic";
+import { Avatar, Box, useMediaQuery, useTheme } from "@mui/material";
 import { Inter } from "next/font/google";
 import React from "react";
 const inter = Inter({ subsets: ["latin"] });
-const ButtonTheme = dynamic(() => import("@/components/common/Button"), {
-  ssr: false,
-});
 
 const ProfileBadge = () => {
   const { data } = useProfileStore();
-  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
-    null
-  );
+  const theme = useTheme();
+  const downMd = useMediaQuery(theme.breakpoints.down("md"));
 
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const open = Boolean(anchorEl);
-  const id = open ? "simple-popover" : undefined;
-
-  const handleLogout = () => {
-    helper.clearLocalStorage();
-    window.location.href = "/";
-  };
   return (
     <>
-      <Box
-        component={"button"}
-        aria-describedby={id}
-        onClick={handleClick}
-        sx={{
-          fontStyle: "normal",
-          fontWeight: 500,
-          fontSize: "16px",
-          fontFamily: `${inter.style.fontFamily} !important`,
-          color: "var(--white)",
-          display: "flex",
-          alignItems: "center",
-          gap: 1,
-        }}
-      >
-        {data.username}
-        <Avatar sx={{ ml: 1, width: 40, height: 40 }} />
-      </Box>
-
-      <Popover
-        id={id}
-        open={open}
-        anchorEl={anchorEl}
-        onClose={handleClose}
-        sx={{
-          "& .MuiPaper-root": {
-            mt: "10px",
-            p: 3,
-          },
-        }}
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "right",
-        }}
-        transformOrigin={{
-          vertical: "top",
-          horizontal: "right",
-        }}
-      >
-        <ButtonTheme
-          label="Log out"
-          onClick={() => {
-            handleLogout();
+      {!downMd && (
+        <Box
+          component={"button"}
+          sx={{
+            fontStyle: "normal",
+            fontWeight: 500,
+            fontSize: "16px",
+            fontFamily: `${inter.style.fontFamily} !important`,
+            color: "var(--white)",
+            display: "flex",
+            alignItems: "center",
+            gap: 1,
           }}
-        />
-      </Popover>
+        >
+          {data.username}
+          <Avatar sx={{ ml: 1, width: 40, height: 40 }} />
+        </Box>
+      )}
     </>
   );
 };

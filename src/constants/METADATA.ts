@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 
 export const METADATA: Metadata = {
-  // metadataBase: new URL(""),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_FRONTEND_ENDPOINT || 'http://localhost:3000'),
   title: 'Board Wow - The Ultimate Platform for Talent and Event Connections in Thailand',
   description:
     "Board Wow - The Ultimate Platform for Talent and Event Connections in Thailand",
