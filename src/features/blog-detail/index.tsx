@@ -4,9 +4,10 @@ import CardBlog from "@/components/common/CardBlog";
 import CardComment from "@/components/common/CardComment";
 import FormComment from "@/features/form-comment";
 import useFormComment from "../form-comment/hooks/useFormComment";
-import { Typography } from "@mui/material";
+import { Typography, useMediaQuery, useTheme } from "@mui/material";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
+import ModalComment from "./views/modal-comment";
 
 // Extend dayjs with the duration plugin
 dayjs.extend(duration);
@@ -19,8 +20,10 @@ const BlogDetailPage = () => {
     blog,
     showTime,
     comments,
+    setOpenComment,
   } = useFormComment();
-
+  const theme = useTheme();
+  const downMd = useMediaQuery(theme.breakpoints.down("md"));
   if (!blog) {
     return <div>Loading...</div>;
   }
@@ -44,12 +47,21 @@ const BlogDetailPage = () => {
         />
       )}
 
-      {openComment && (
+      {openComment && !downMd && (
         <FormComment
           handleSubmit={handleSubmit}
           onSubmit={onSubmit}
           control={control}
           handleOpenComment={handleOpenComment}
+        />
+      )}
+      {downMd && openComment && (
+        <ModalComment
+          openModal={openComment}
+          setOpenModel={setOpenComment}
+          handleSubmit={handleSubmit}
+          onSubmit={onSubmit}
+          control={control}
         />
       )}
 

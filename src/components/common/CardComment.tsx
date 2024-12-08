@@ -9,7 +9,7 @@ interface IProps {
 }
 const CardComment = ({ ...props }: IProps) => {
   return (
-    <>
+    <Box sx={{ width: "100%", mb: 2 }}>
       <CardHeader
         sx={{ p: 0, mb: "10px", fontSize: "16px", fontWeight: 600 }}
         avatar={<Avatar sx={{}} aria-label="recipe"></Avatar>}
@@ -55,7 +55,7 @@ const CardComment = ({ ...props }: IProps) => {
       >
         {props.description}
       </Typography>
-    </>
+    </Box>
   );
 };
 export default CardComment;

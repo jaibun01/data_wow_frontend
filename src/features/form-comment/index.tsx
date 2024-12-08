@@ -1,5 +1,5 @@
 "use client";
-import { Box } from "@mui/material";
+import { Box, useMediaQuery, useTheme } from "@mui/material";
 import { InputsFomrComment } from "./hooks/useFormComment";
 import InputTheme from "@/components/form-hook/InputTheme";
 import ButtonTheme from "@/components/common/Button";
@@ -17,8 +17,10 @@ const FormComment = ({
   onSubmit,
   handleOpenComment,
 }: IProps) => {
+  const theme = useTheme();
+  const downMd = useMediaQuery(theme.breakpoints.down("md"));
   return (
-    <Box sx={{ mt: 5 }}>
+    <Box sx={{ mt: { xs: 2, md: 5 } }}>
       <form onSubmit={handleSubmit(onSubmit)}>
         {/* register your input into the hook by invoking the "register" function */}
         <InputTheme
@@ -36,7 +38,7 @@ const FormComment = ({
         {/* errors will return when field validation fails  */}
         <Box
           sx={{
-            display: "flex",
+            display: { md: "flex" },
             alignItems: "center",
             gap: 2,
             justifyContent: "end",
@@ -46,9 +48,15 @@ const FormComment = ({
           <ButtonTheme
             label={"Cancel"}
             theme="outline"
+            fullWidth={downMd ? true : false}
             onClick={handleOpenComment}
           />
-          <ButtonTheme label={"Post"} type="submit" />
+          <ButtonTheme
+            fullWidth={downMd ? true : false}
+            label={"Post"}
+            type="submit"
+            sx={{ mt: { md: 0, xs: 2 } }}
+          />
         </Box>
       </form>
     </Box>

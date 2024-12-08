@@ -61,6 +61,7 @@ const useFormComment = () => {
           setOpenComment(false)
           mutate()
           mutateComment()
+          methods.reset()
           toast.success('Create comment success')
         }
         setLoading(false)
@@ -88,6 +89,7 @@ const useFormComment = () => {
       onSubmit,
       handleOpenComment,
       openComment,
+      setOpenComment,
       blog,
       showTime,
       loading,
