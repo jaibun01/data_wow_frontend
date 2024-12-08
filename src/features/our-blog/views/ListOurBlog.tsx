@@ -4,9 +4,10 @@ import { Box, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 interface IProps {
   list: IDataBlog[];
-  setOpenModelCreate?: React.Dispatch<React.SetStateAction<boolean | IDataBlog>>;
+  setOpenModalCreate?: React.Dispatch<React.SetStateAction<boolean | IDataBlog>>;
+  setOpenModalDelete?: React.Dispatch<React.SetStateAction<boolean | IDataBlog>>;
 }
-const ListOurBlog = ({ list, setOpenModelCreate }: IProps) => {
+const ListOurBlog = ({ list, setOpenModalCreate, setOpenModalDelete }: IProps) => {
   const router = useRouter();
 
   return (
@@ -34,7 +35,12 @@ const ListOurBlog = ({ list, setOpenModelCreate }: IProps) => {
                 comment={10}
                 edit
                 handleEdit={() => {
-                  setOpenModelCreate?.(item);
+                  setOpenModalCreate?.(item);
+                }}
+                handleDelete={() => {
+                  console.log('>>');
+                  
+                  setOpenModalDelete?.(item);
                 }}
               />
             </Box>

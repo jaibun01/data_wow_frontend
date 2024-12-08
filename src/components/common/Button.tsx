@@ -1,7 +1,7 @@
 import { Button, ButtonProps } from "@mui/material";
 interface IProps extends ButtonProps {
   label: string;
-  theme?: "outline" | "fill";
+  theme?: "outline" | "fill" | "outline_grey" | "red_fill";
 }
 const ButtonTheme = ({ label, theme = "fill", ...props }: IProps) => {
   return (
@@ -17,10 +17,26 @@ const ButtonTheme = ({ label, theme = "fill", ...props }: IProps) => {
       endIcon={props.endIcon || null}
       sx={{
         backgroundColor: `${
-          theme === "outline" ? "var(--white)" : "var(--success)"
+          theme?.includes("outline")
+            ? "var(--white)"
+            : theme === "red_fill"
+            ? "var(--red-500)"
+            : "var(--success)"
         }`,
-        border: theme === "outline" ? `1px solid var(--success)` : `0px`,
-        color: theme === "outline" ? "var(--success)" : "var(--white)",
+        border:
+          theme === "outline"
+            ? `1px solid var(--success)`
+            : theme === "outline_grey"
+            ? `1px solid var(--grey-300)`
+            : `0px`,
+        color:
+          theme === "outline"
+            ? "var(--success)"
+            : theme === "red_fill"
+            ? "var(--white)"
+            : theme === "outline_grey"
+            ? "var(--grey-300)"
+            : "var(--white)",
         borderRadius: "8px",
         height: "40px",
         minWidth: "fit-content",

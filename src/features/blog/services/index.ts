@@ -71,4 +71,22 @@ export class BlogServices {
       throw new Error(error)
     }
   }
+
+  public async delete(request: {
+    _id: string}
+  ): Promise<IResCreateBlog> {
+    try {
+      const res = await serviceApi.delete<IResCreateBlog>(
+        `/blog/${request._id}`,
+      )
+      const data = res.data
+
+      if (!data) throw new Error()
+
+      return data
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      throw new Error(error)
+    }
+  }
 }

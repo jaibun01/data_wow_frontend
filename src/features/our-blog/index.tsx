@@ -5,6 +5,7 @@ import ModalCreateBlog from "../blog/views/ModalCreateBlog";
 import useCreateBlog from "../blog/hooks/useCreateBlog";
 import { IDataBlog, IDataCommunity } from "../blog/interfaces";
 import useOurBlog from "./hooks/useOurBlog";
+import ModalDelete from "./views/modal-delete";
 
 const OurBlog = () => {
   const { setFilter, data, mutate } = useOurBlog();
@@ -15,6 +16,9 @@ const OurBlog = () => {
     methods,
     community,
     loadingForm,
+    openModelDelete,
+    setOpenModelDelete,
+    onDelete,
   } = useCreateBlog({ refreshMyBlog: mutate });
   return (
     <>
@@ -33,9 +37,16 @@ const OurBlog = () => {
           loadingForm={loadingForm}
           community={community}
         />
+        <ModalDelete
+          openModelDelete={openModelDelete}
+          setOpenModelDelete={setOpenModelDelete}
+          handelDelete={onDelete}
+          loadingForm={loadingForm}
+        />
         <ListOurBlog
           list={data as IDataBlog[]}
-          setOpenModelCreate={setOpenModelCreate}
+          setOpenModalCreate={setOpenModelCreate}
+          setOpenModalDelete={setOpenModelDelete}
         />
       </Box>
     </>

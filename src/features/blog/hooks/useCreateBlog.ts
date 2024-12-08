@@ -26,6 +26,8 @@ const schema = yup
  }
 const useCreateBlog = ({ refreshMyBlog }: IPropHoookCreate) => {
     const [openModelCreate, setOpenModelCreate] = useState<boolean | IDataBlog>(false);
+    const [openModelDelete, setOpenModelDelete] = useState<boolean | IDataBlog>(false);
+
     const [loadingForm, setOpenloadingForm] = useState(false);
     const [filter, setFilter] = useState({
       search: "",
@@ -114,6 +116,26 @@ const useCreateBlog = ({ refreshMyBlog }: IPropHoookCreate) => {
         onCreate(data)
       }
     }
+
+    const onDelete = () => {
+      setOpenloadingForm(true)
+      blogServices.delete({
+        _id: (openModelDelete as IDataBlog)?._id
+      }).then((res) => {
+        if (res) {
+          setOpenModelDelete(false)
+          refreshMyBlog?.()
+          toast.success('Delete blog success')
+        } else {
+          toast.error('Delete blog failed')
+        }
+        setOpenloadingForm(false)
+      }).catch((err: Error) => {
+        console.log(err)
+        toast.error(err.message || 'Delete blog failed')
+        setOpenloadingForm(false)
+      })
+    }
     
     return { 
       openModelCreate, 
@@ -124,7 +146,10 @@ const useCreateBlog = ({ refreshMyBlog }: IPropHoookCreate) => {
       isLoading,
       loadingForm,
       community,
-      setFilter
+      setFilter,
+      openModelDelete, 
+      setOpenModelDelete,
+      onDelete
     }
 }
 
