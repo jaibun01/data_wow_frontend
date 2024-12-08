@@ -5,7 +5,7 @@ import { SignInMutation } from "@/features/form-signin/services";
 import { optionsOnceTime } from "@/utils/axios";
 
 // NEXT
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 // TYPES
 import React from "react";
@@ -13,7 +13,7 @@ import useSWR from "swr";
 // ==============================|| AUTH GUARD ||============================== //
 const signInMutation = new SignInMutation();
 const AuthGuard = ({ children }: { children: React.ReactNode }) => {
-  const router = useRouter();
+  // const router = useRouter();
   const pathname = usePathname();
 
   const URL = [`/auth/profile`];
@@ -29,7 +29,8 @@ const AuthGuard = ({ children }: { children: React.ReactNode }) => {
 
   if (!data) {
     if (pathname === "/our-blog") {
-      router.push("/signin");
+      // router.push("/signin");
+      window.location.href = "/signin";
     }
   }
   return <>{children}</>;

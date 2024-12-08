@@ -22,12 +22,12 @@ const FormComment = ({
       <form onSubmit={handleSubmit(onSubmit)}>
         {/* register your input into the hook by invoking the "register" function */}
         <InputTheme
-          id="description"
+          id="content"
           placeholder="What’s on your mind..."
           sx={{
             width: "100%",
           }}
-          name="description"
+          name="content"
           control={control}
           maxRows={4}
           multiline

@@ -45,13 +45,13 @@ const useSignIn = () => {
                     setDataProfile(res)
                     router.push(`/`)
                 }).catch((err: AxiosError) => {
-                    toast.success(err?.message || 'Sign in failed')
+                    toast.error(err?.message || 'Sign in failed')
                     setLoading(false)
                 })
             }
             setLoading(false)
         }).catch((err: AxiosError) => {
-            toast.success(err?.message || 'Sign in failed')
+            toast.error(err?.message || 'Sign in failed')
             setLoading(false)
         })
         

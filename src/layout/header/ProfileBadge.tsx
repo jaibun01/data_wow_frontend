@@ -2,12 +2,14 @@
 
 import useProfileStore from "@/stores/useProfileStore";
 import { helper } from "@/utils/helpers";
-import { Avatar, Popover, Typography } from "@mui/material";
+import { Avatar, Box, Popover } from "@mui/material";
 import dynamic from "next/dynamic";
 import { Inter } from "next/font/google";
 import React from "react";
 const inter = Inter({ subsets: ["latin"] });
-const ButtonTheme = dynamic(() => import('@/components/common/Button'), { ssr: false })
+const ButtonTheme = dynamic(() => import("@/components/common/Button"), {
+  ssr: false,
+});
 
 const ProfileBadge = () => {
   const { data } = useProfileStore();
@@ -32,7 +34,9 @@ const ProfileBadge = () => {
   };
   return (
     <>
-      <Typography
+      <Box
+        component={"button"}
+        aria-describedby={id}
         onClick={handleClick}
         sx={{
           fontStyle: "normal",
@@ -47,7 +51,7 @@ const ProfileBadge = () => {
       >
         {data.username}
         <Avatar sx={{ ml: 1, width: 40, height: 40 }} />
-      </Typography>
+      </Box>
 
       <Popover
         id={id}
@@ -62,6 +66,10 @@ const ProfileBadge = () => {
         }}
         anchorOrigin={{
           vertical: "bottom",
+          horizontal: "right",
+        }}
+        transformOrigin={{
+          vertical: "top",
           horizontal: "right",
         }}
       >

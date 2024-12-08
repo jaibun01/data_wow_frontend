@@ -30,7 +30,7 @@ const Post = ({ list }: IProps) => {
                 title={item.title}
                 badge={item.community_id.title}
                 description={item.description}
-                comment={10}
+                comment={item.comments || 0}
               />
             </Box>
           );

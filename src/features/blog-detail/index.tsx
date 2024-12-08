@@ -4,24 +4,35 @@ import CardBlog from "@/components/common/CardBlog";
 import CardComment from "@/components/common/CardComment";
 import FormComment from "@/features/form-comment";
 import useFormComment from "../form-comment/hooks/useFormComment";
+import { Typography } from "@mui/material";
+import dayjs from "dayjs";
+import duration from "dayjs/plugin/duration";
+
+// Extend dayjs with the duration plugin
+dayjs.extend(duration);
 const BlogDetailPage = () => {
   const {
     methods: { handleSubmit, control },
     onSubmit,
     handleOpenComment,
     openComment,
+    blog,
+    showTime,
+    comments,
   } = useFormComment();
+
+  if (!blog) {
+    return <div>Loading...</div>;
+  }
   return (
     <>
       <CardBlog
-        name={"Zach"}
-        time="1d ago"
-        title={"The Big Short War"}
-        badge={"History"}
-        description={
-          "Tall, athletic, handsome with cerulean eyes, he was the kind of hyper-ambitious kid other kids loved to hate and just the type to make a big wager with no margin for error. But on the night before the S.A.T., his father took pity on him and canceled the bet. “I would’ve lost it,” Ackman concedes. He got a 780 on the verbal and a 750 on the math. “One wrong on the verbal, three wrong on the math,” he muses. “I’m still convinced some of the questions were wrong.”"
-        }
-        comment={10}
+        name={blog?.user_id?.username || ""}
+        time={`${showTime} ago`}
+        title={blog?.title || ""}
+        badge={blog?.community_id?.title || ""}
+        description={blog?.description || ""}
+        comment={blog.comments || 0}
         page="detail"
       />
       {!openComment && (
@@ -42,13 +53,29 @@ const BlogDetailPage = () => {
         />
       )}
 
-      <CardComment
-        name={"Zach"}
-        time="1d ago"
-        description={
-          "Tall, athletic, handsome with cerulean eyes, he was the kind of hyper-ambitious kid other kids loved to hate and just the type to make a big wager with no margin for error. But on the night before the S.A.T., his father took pity on him and canceled the bet. “I would’ve lost it,” Ackman concedes. He got a 780 on the verbal and a 750 on the math. “One wrong on the verbal, three wrong on the math,” he muses. “I’m still convinced some of the questions were wrong."
-        }
-      />
+      {comments && comments?.length > 0 ? (
+        comments?.map((item) => {
+          const x = dayjs();
+          const y = dayjs(item.createdAt);
+          const durations = dayjs.duration(x.diff(y));
+          const showTime =
+            durations.asHours() > 1
+              ? `${durations.asHours()?.toFixed(0)}h`
+              : durations.asHours() > 24
+              ? `${durations.asDays()?.toFixed(0)}d`
+              : `${durations.asMinutes()?.toFixed(0)}m`;
+          return (
+            <CardComment
+              key={item._id}
+              name={item.user_id.username}
+              time={`${showTime} ago`}
+              description={item.content}
+            />
+          );
+        })
+      ) : (
+        <Typography>No comments</Typography>
+      )}
     </>
   );
 };
