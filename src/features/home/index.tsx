@@ -1,5 +1,5 @@
 "use client";
-import { Box, useMediaQuery, useTheme } from "@mui/material";
+import { Box } from "@mui/material";
 import HeadSearch from "./views/HeadSearch";
 import useCreateBlog from "../blog/hooks/useCreateBlog";
 import dynamic from "next/dynamic";
@@ -12,9 +12,7 @@ const Post = dynamic(() => import("@/features/home/views/blog-list"), {
   ssr: false,
 });
 const Home = () => {
-  const theme = useTheme();
-  const downSM = useMediaQuery(theme.breakpoints.down("sm"));
-  console.log("downSM", downSM);
+
   const {
     data,
     openModelCreate,

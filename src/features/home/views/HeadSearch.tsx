@@ -2,8 +2,10 @@ import InputTheme from "@/components/form-hook/InputTheme";
 import SelectTheme from "@/components/form-hook/SelectTheme";
 import ButtonTheme from "@/components/common/Button";
 import SearchIcon from "@/components/icons/SearchIcon";
-import { Box } from "@mui/material";
+import { Box, IconButton, useMediaQuery, useTheme } from "@mui/material";
 import { IDataBlog, IDataCommunity } from "@/features/blog/interfaces";
+import { useMemo, useState } from "react";
+import CloseIcon from "@mui/icons-material/Close";
 interface IProps {
   setOpenModelCreate: React.Dispatch<React.SetStateAction<boolean | IDataBlog>>;
   community: IDataCommunity[];
@@ -12,36 +14,58 @@ interface IProps {
   >;
 }
 const HeadSearch = ({ setOpenModelCreate, community, setFilter }: IProps) => {
-  return (
-    <Box
-      sx={{
-        display: { xs: "flex" },
-        alignItems: "center",
-        flexWrap: "wrap",
-        gap: 2,
-      }}
-    >
+  const [openSearch, setOpenSearch] = useState(false);
+  const theme = useTheme();
+  const downMd = useMediaQuery(theme.breakpoints.down("md"));
+
+  const inputSearch = useMemo(() => {
+    return (
       <InputTheme
         id="search"
         startIcon={<SearchIcon />}
         placeholder="Search"
         sx={{
           width: "100%",
-          maxWidth: { xs: "100%", md: "60%", lg: "70%" },
+          maxWidth: { xs: "100%", md: "70%", lg: "75%", xl: "80%" },
         }}
+        endIcon={
+          openSearch && (
+            <IconButton onClick={() => setOpenSearch(!openSearch)}>
+              <CloseIcon />
+            </IconButton>
+          )
+        }
         name="search"
         onChange={(e) => {
           setFilter((prev) => ({ ...prev, search: e.target.value }));
         }}
       />
+    );
+  }, [openSearch, setFilter]);
 
-      {/* <IconButton onClick={() => setOpenSearch(!openSearch)}>
+  return (
+    <Box
+      sx={{
+        display: { xs: "flex" },
+        alignItems: "center",
+        flexWrap: { xs: openSearch ? "wrap" : "nowrap" }, //"wrap",
+        gap: 2,
+      }}
+    >
+      {!downMd && inputSearch}
+      {openSearch && downMd && inputSearch}
+      {/* {inputSearch} */}
+      {downMd && !openSearch && (
+        <IconButton onClick={() => setOpenSearch(!openSearch)}>
           <SearchIcon />
-        </IconButton> */}
+        </IconButton>
+      )}
+
       <Box
         sx={{
           ml: "auto",
           display: "flex",
+          justifyContent: "flex-end",
           gap: 2,
           flexWrap: { md: "nowrap", xs: "wrap" },
           width: { xs: "100%", md: "auto" },
