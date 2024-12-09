@@ -5,6 +5,13 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 First, run the development server:
 
 ```bash
+# .env
+NEXT_PUBLIC_API_ENDPOINT=
+NEXT_PUBLIC_FRONTEND_ENDPOINT=
+
+# install package
+npm install
+
 npm run dev
 # or
 yarn dev
@@ -14,6 +21,12 @@ pnpm dev
 bun dev
 ```
 
+## libraries
+
+```bash
+Tailwind CSS
+Material UI
+```
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
