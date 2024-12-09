@@ -11,7 +11,8 @@ import {
   ControllerRenderProps,
   FieldError,
 } from "react-hook-form";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
+import TickIcon from "../icons/TickIcon";
 interface IOpetionSelect {
   label: string;
   value: string;
@@ -19,13 +20,15 @@ interface IOpetionSelect {
 interface IProps extends BaseSelectProps {
   id: string;
   options: IOpetionSelect[];
-
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   control?: Control<any, any>;
   name: string;
 }
 
 const SelectTheme = ({ ...props }: IProps) => {
+  const [select, setSelect] = useState<string>();
+  console.log("select", select);
+  
   const selectComponent = useCallback(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (field?: ControllerRenderProps<any, any>, errors?: FieldError) => {
@@ -49,11 +52,17 @@ const SelectTheme = ({ ...props }: IProps) => {
                     "&.Mui-selected:hover": {
                       backgroundColor: "var(--green-100)", // Hover effect for selected option
                     },
+                    "&.Mui-selected::before": {
+                      // content: "`✔`", /* Unicode checkmark or replace with your icon */
+                      marginRight: '8px',
+                      color: 'green'
+                    }
                   },
                 },
               },
             }}
             sx={{
+              
               "& .MuiSelect-icon": {
                 color: "var(--text)", // Custom color for the arrow
               },
@@ -78,6 +87,9 @@ const SelectTheme = ({ ...props }: IProps) => {
                 borderRadius: "8px !important",
                 outline: 0,
                 outlineColor: "transparent",
+                "& .tick-icon": {
+                  display: 'none'
+                },
                 "&:hover": {
                   outline: 0, //`1px solid var(--green-500)`,
                   borderRadius: "8px !important",
@@ -92,9 +104,11 @@ const SelectTheme = ({ ...props }: IProps) => {
               ...props.sx,
             }}
             onChange={(e) => {
+              setSelect(e.target.value as unknown as string);
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
               (props?.onChange as any)?.(e);
             }}
+            value={field?.value || select || ""}
             {...field}
           >
             <MenuItem
@@ -109,11 +123,19 @@ const SelectTheme = ({ ...props }: IProps) => {
                 sx={{
                   backgroundColor: "var(--white)",
                   "&:hover": { backgroundColor: "var(--green-100)" },
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  width: "200px",
                 }}
                 key={option.value}
                 value={option.value}
               >
-                {option.label}
+                {option.label} 
+                {option.value === select && (
+                   <TickIcon className="tick-icon" />
+                )}
+               
               </MenuItem>
             ))}
           </TextField>
@@ -128,7 +150,7 @@ const SelectTheme = ({ ...props }: IProps) => {
         </>
       );
     },
-    [props.id, props.label, props?.onChange, props.options, props.sx]
+    [props.id, props.label, props?.onChange, props.options, props.sx, select]
   );
   return (
     <>

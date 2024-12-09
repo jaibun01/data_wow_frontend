@@ -6,7 +6,7 @@ export const METADATA: Metadata = {
   description:
     "Board Wow - The Ultimate Platform for Talent and Event Connections in Thailand",
   icons: {
-    icon: `/notebook.png`
+    icon: `/note.png`
   },
   openGraph: {
     type: 'website',
